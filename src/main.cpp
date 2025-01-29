@@ -6,6 +6,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <cstdlib>
+#include <iostream>
 #include <random>
 #include <string>
 
@@ -53,10 +54,11 @@ void clearScreen() {
   std::random_device rd;
   std::mt19937 gen(rd());
 
-  std::uniform_real_distribution<float> dis(0, 200);
+  std::uniform_real_distribution<float> dis(25, 75);
 
-  ballDirection = {(dis(gen) - 50) / 100, (dis(gen) - 100) / 100};
-  ballDirection = ballDirection.normalized();
+  ballDirection = {(float)(rand() % 2 > 0 ? -1 : 1),
+                   (dis(gen) / 100) - rand() % 2};
+  std::cout << ballDirection.x << ", " << ballDirection.y << std::endl;
 }
 
 void updateScore() {
